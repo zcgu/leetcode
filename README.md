@@ -54,26 +54,65 @@ Add Digits  		49.7%	Easy
 
 math
 
+余9，判断0
+
 104	
 Maximum Depth of Binary Tree  		49.6%	Easy	
+
+tree
+
+child都是none才是leaf
+
 243	
 Shortest Word Distance  		48.9%	Easy	
+
+lock
+
 389	
 Find the Difference  		48.9%	Easy	
+
+string
+
+2个一对，只有一个单独，bit或
+ord(), chr()
+
 226	
 Invert Binary Tree  		48.2%	Easy	
+
+bug free
+
 283	
 Move Zeroes  		46.2%	Easy	
+
+p1先找0，p2从p1再找非零
+
 237	
-Delete Node in a Linked List  		44.7%	Easy	
+Delete Node in a Linked List  		44.7%	Easy
+
+判断node.next.next
+
 349	
 Intersection of Two Arrays  		44.5%	Easy	
+
+bug free
+
 383	
 Ransom Note  		44.4%	Easy	
+
+.count()
+
 100	
 Same Tree  		44.4%	Easy	
+
+if not p and not q:
+if not p or not q:
+
 171	
 Excel Sheet Column Number  		43.9%	Easy	
+
+注意从零开始
+
+-----------------------------------------------------
 242	
 Valid Anagram  		43.7%	Easy	
 252	
