@@ -30,16 +30,30 @@ bug free
 266	
 Palindrome Permutation  		53.2%	Easy	
 
-
+lock
 
 293	
 Flip Game  		51.9%	Easy	
+
+lock
+
 371	
 Sum of Two Integers  		51.8%	Easy	
+
+todo
+
 136	
 Single Number  		51.7%	Easy	
+
+bit
+
+bug free
+
 258	
 Add Digits  		49.7%	Easy	
+
+math
+
 104	
 Maximum Depth of Binary Tree  		49.6%	Easy	
 243	
