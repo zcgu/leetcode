@@ -781,6 +781,11 @@ Expression Add Operators  		26.8%	Hard
 Insert Delete GetRandom O(1) - Duplicates allowed  		26.7%	Hard	
 37	
 Sudoku Solver  		26.6%	Hard	
+
+dfs
+
+写一个valid（），每次先找有没有空的，如果返回true就返回true
+
 233	
 Number of Digit One  		26.3%	Hard	
 138	
@@ -844,18 +849,43 @@ Range Sum Query 2D - Mutable  		20.9%	Hard
 273	
 Integer to English Words  		20.1%	Hard	
 4	
-Median of Two Sorted Arrays  		19.9%	Hard	
+Median of Two Sorted Arrays  		19.9%	Hard
+
+特别烦，注意四个边界
+
 44	
 Wildcard Matching  		18.3%	Hard	
+
+dfs或者dp。
+dp注意大小是i+1，j+1，for的时候。
+dp的p是＊的方程是dp[i][j] = dp[i-1][j] or dp[i][j-1]
+
 68	
 Text Justification  		17.1%	Hard	
+
+用pos记录位置，k纪录这一行取多少个。
+每一次先算k，取出list，再分三种情况：只有1个单词的，最后一行的，和普通的。
+
 391	
 Perfect Rectangle  		16.5%	Hard	
+
+首先，总面积相等
+其次，四个外角点只有一个
+最后，其他所有四个点总和，每个点为奇数
+
 146	
 LRU Cache  		15.9%	Hard	
+
+double-link list
+注意set的时候先get，再删除，再添加
+
 149	
 Max Points on a Line   
 15.0%	Hard	
+
+取每个点，用map纪录其它点对其斜率，注意重叠、相同x、和一般三种情况。
+取最大时注意map为空情况
+
 126	
 Word Ladder II  		13.7%	Hard	
 
@@ -866,3 +896,6 @@ search
 
 65	
 Valid Number  		12.4%	Hard	
+
+
+非常烦
