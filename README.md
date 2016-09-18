@@ -112,15 +112,28 @@ Excel Sheet Column Number  		43.9%	Easy
 
 注意从零开始
 
------------------------------------------------------
 242	
 Valid Anagram  		43.7%	Easy	
+
+俩map就行了
+
 252	
 Meeting Rooms  		43.7%	Easy	
+
+lock
+
 169	
 Majority Element  		43.4%	Easy	
+
+i 从1往后找，不等于的删除，注意往后退的边界。
+
 387	
-First Unique Character in a String  		43.4%	Easy	
+First Unique Character in a String  		43.4%	Easy
+
+map跑两次就好了
+
+
+---------------------------
 217	
 Contains Duplicate  		42.5%	Easy	
 350	
@@ -285,10 +298,18 @@ String to Integer (atoi)
 13.7%	Easy	
 338	
 Counting Bits  		58.4%	Medium	
+
+非常简单，lst[i] = lst[i/2] +  i % 2
+
 366	
 Find Leaves of Binary Tree  		54.8%	Medium	
+
+
+
 280	
 Wiggle Sort  		52.3%	Medium	
+
+
 369	
 Plus One Linked List  		51.4%	Medium	
 370	
@@ -300,51 +321,103 @@ Sparse Matrix Multiplication  		49.1%	Medium
 364	
 Nested List Weight Sum II  		48.9%	Medium	
 167	
-Two Sum II - Input array is sorted  		48.5%	Medium	
+Two Sum II - Input array is sorted  		48.5%	
+Medium	
+
+左右两个p
+
+
 245	
 Shortest Word Distance III  		47.9%	Medium	
 260	
 Single Number III  		47.3%	Medium	
+
+先全xor找到两个数的xor， 再用1往左进位根这个数and，找到mask，再所有的数与mask and是0的一组不是0的一组，分别xor。
+
 382	
 Linked List Random Node  		45.7%	Medium	
+
+reservior sampling。random.randint(1, n)包括n！
+
 281	
 Zigzag Iterator  		45.6%	Medium	
 238	
 Product of Array Except Self  		45.2%	Medium	
+
+先从左往右再从右往左。
+
 384	
 Shuffle an Array  		44.7%	Medium	
+
+randint就好了。
+
 323	
 Number of Connected Components in an Undirected Graph  		44.7%	Medium	
+
+
+
 256	
 Paint House  		44.6%	Medium	
 348	
 Design Tic-Tac-Toe  		44.3%	Medium	
 347	
 Top K Frequent Elements  		44.2%	Medium	
+
+map就行了。
+
 122	
 Best Time to Buy and Sell Stock II  		44.2%	Medium	
+
+1. 后一个比前一个大就加上
+2. dp。buy［］，sell［］。
+
 357	
 Count Numbers with Unique Digits   
 44.1%	Medium	
+
+for i：lst[-1] * max(0, (10 - (i - 1))) 
+sum（lst）
+
 392	
 Is Subsequence  		44.0%	Medium	
+
+第一眼以为用dfs，其实不用，匹配t中第一次出现的与s中的就好了。
+
 343	
 Integer Break   
 43.6%	Medium	
+
+dp
+
 294	
 Flip Game II  		43.3%	Medium	
 268	
 Missing Number  		42.2%	Medium	
+
+太简单
+
 94	
 Binary Tree Inorder Traversal  		41.9%	Medium	
+
+太简单
+
 144	
 Binary Tree Preorder Traversal  		41.7%	Medium	
+
+太简单
+
 378	
 Kth Smallest Element in a Sorted Matrix  		41.7%	Medium	
+
+visited＋heapq
+
 320	
 Generalized Abbreviation  		41.7%	Medium	
 319	
 Bulb Switcher  		41.4%	Medium	
+
+奇怪的题，math。sqrt（n）。
+
 12	
 Integer to Roman  		41.3%	Medium	
 360	
@@ -354,6 +427,11 @@ Maximum Size Subarray Sum Equals k  		41.2%	Medium
 318	
 Maximum Product of Word Lengths   
 41.1%	Medium	
+
+用bit存字母。
+
+-------------------------------------------------
+
 328	
 Odd Even Linked List  		40.5%	Medium	
 230	
