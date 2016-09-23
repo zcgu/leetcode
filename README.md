@@ -125,7 +125,9 @@ lock
 169	
 Majority Element  		43.4%	Easy	
 
-i 从1往后找，不等于的删除，注意往后退的边界。
+1. i 从1往后找，不等于的删除，注意往后退的边界。
+
+2. https://gregable.com/2013/10/majority-vote-algorithm-find-majority.html
 
 387	
 First Unique Character in a String  		43.4%	Easy
@@ -677,6 +679,10 @@ Minimum Height Trees  		27.8%	Medium
 Next Permutation  		27.5%	Medium	
 50	
 Pow(x, n)  		27.4%	Medium	
+
+https://discuss.leetcode.com/topic/40546/iterative-log-n-solution-with-clear-explanation
+
+
 271	
 Encode and Decode Strings  		27.3%	Medium	
 229	
