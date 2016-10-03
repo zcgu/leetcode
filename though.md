@@ -23,7 +23,7 @@ l = mid + 1
 r = mid
 ```
 
-找一系列的最右边一个，first bad version,
+找一系列的最右边一个，
 ```
 mid = (l + r) / 2 + 1
 
