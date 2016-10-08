@@ -12,15 +12,11 @@ class Solution(object):
                 if mask & num != 0:
                     count[i] += 1
         
-        res = int(0)
-        for i in range(31):
+        res = 0
+        for i in range(32):
             if count[i] % 3 != 0:
                 res |= 1 << i
         
-        i = 31
-        if count[i] % 3 != 0:
-            res -= 1 << 31
-            
-        return res
+        return res if res <= 2 ** 31 - 1 else res - 2 ** 32     # 这个python真尼玛烦啊
             
         
