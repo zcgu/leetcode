@@ -4,28 +4,29 @@ class Solution(object):
         :type s: str
         :rtype: List[str]
         """
-        self.res = []
         self.visit = set()
-        self.dfs(s)
-        return self.res
-    
+        
+        return self.dfs(s)
+        
     def dfs(self, s):
+        if s in self.visit: return []
+        self.visit.add(s)
+        
         num = self.cal(s)
         
+        if num == 0: return [s]
         
-        if num == 0 and s not in self.visit:
-            self.res.append(s)
-            self.visit.add(s)
-            return
+        res = []
         
-        self.visit.add(s)
-        for i in range(len(s)):
-            s2 = s[:i] + s[i+1:]
+        for k in range(len(s) + 1):
+            s2 = s[:k] + s[k+1:]
             
-            if s2 not in self.visit and self.cal(s2) < num:
-                self.dfs(s2)
+            if self.cal(s2) < num:
+                res += self.dfs(s2)
         
-    
+        return res
+        
+                
     def cal(self, s):
         res = 0
         count = 0
