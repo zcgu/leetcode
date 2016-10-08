@@ -5,8 +5,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        
-        res = m
-        for i in range(m+1, n+1):
-            res &= i
-        return res
+        # n & (n-1)的话永远会把n的最后一个1给消除掉
+        while n > m:
+            n = n & (n - 1)
+        return n
