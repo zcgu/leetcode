@@ -4,15 +4,7 @@ class Solution(object):
         :type num: int
         :rtype: bool
         """
-        if num == 0:
-            return False
+        if num <= 0 : return False
         
-        if num == 1:
-            return True
-        
-        while num != 1:
-            if num % 4 != 0:
-                return False
-            num /= 4
-        
-        return True
+        # 0101 0101 0101
+        return 0x55555555 | num == 0x55555555 and (num - 1) & num == 0
