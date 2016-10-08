@@ -4,16 +4,13 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: int
         """
-        if not matrix:
-            return 0
+        if not matrix: return 0
             
         self.cache = [[-1 for j in range(len(matrix[0]))] for i in range(len(matrix))]
         
-        self.res = 0
-        for x in range(len(matrix)):
-            for y in range(len(matrix[0])):
-                self.res = max(self.res, self.dfs(matrix, x, y))
-        return self.res
+        return max(self.dfs(matrix, x, y)
+                   for x in range(len(matrix))
+                   for y in range(len(matrix[0])))
         
     def dfs(self, m, x, y):
         if self.cache[x][y] != -1:
