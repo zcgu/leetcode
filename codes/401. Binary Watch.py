@@ -5,57 +5,27 @@ class Solution(object):
         :rtype: List[str]
         """
         res = []
-        for i in range(num + 1):
-            hs = self.hour(i)
-            ms = self.minute(num-i)
+        for k in range(num + 1):
+            lst1 = self.dfs(k, 8)
+            lst2 = self.dfs(num - k, 32)
             
-            for h in hs:
-                for m in ms:
-                    if len(m) < 2:
-                        m = '0' + m
-                    res.append(h + ':' + m)
-        res.sort()
+            for time1 in lst1:
+                for time2 in lst2:
+                    if time1 >= 12 or time2 >= 60:  # 这个。。呃
+                        continue
+                    res.append(str(time1) + ':' + '0' * (2 - len(str(time2))) + str(time2))
         return res
         
+    def dfs(self, num, maxnum):
+        if num == 0: return [0]     # 这个结束是什么要搞清楚
+        if maxnum == 0: return []
         
+        res = []
         
-    def hour(self, num):
-        if num > 4:
-            return []
-
-        self.hours = []
-        self.find(num, 4, 0)
-        return self.hours
+        for time in self.dfs(num - 1, maxnum / 2):
+            res.append(time + maxnum)
         
-    def find(self, num, pos, time):
-        if num == 0:
-            if time <= 11:
-                self.hours.append(str(time))
-            return
-        if pos < 0:
-            return
+        for time in self.dfs(num, maxnum / 2):
+            res.append(time)
         
-        self.find(num, pos-1, time)
-        self.find(num-1, pos-1, time+ 2** pos)
-        
-    
-    def minute(self, num):
-        if num > 6:
-            return []
-            
-        self.minutes = []
-        self.findm(num, 6, 0)
-        return self.minutes
-        
-    def findm(self, num, pos, time):
-        if num == 0:
-            if time <= 59:
-                self.minutes.append(str(time))
-            return
-        if pos < 0:
-            return
-        
-        self.findm(num, pos-1, time)
-        self.findm(num-1, pos-1, time + 2** pos)
-        
-        
+        return res
