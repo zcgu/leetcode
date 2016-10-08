@@ -27,12 +27,15 @@ class Solution(object):
         
     
     def cal(self, s):
-        left = right = 0
-        
+        res = 0
+        count = 0
         for c in s:
-            if c == '(' or c == ')':
-                left += 1 if c == '(' else -1
-                right += left < 0
-                left = max(left, 0)
-                
-        return left + right
+            if c == '(':
+                count += 1
+            elif c == ')':
+                count -= 1
+            
+            if count < 0:
+                res += 1
+                count = 0
+        return res + count
