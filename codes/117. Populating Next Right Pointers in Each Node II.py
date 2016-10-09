@@ -9,41 +9,38 @@
 class Solution:
     # @param root, a tree link node
     # @return nothing
+    
+    # 这两个题，只需要一个head和nexthead，链接head的下一个lvl。
+    
     def connect(self, root):
+        head = root
         
-        nexthead = root
-        
-        while nexthead:
-            cur = nexthead
-            
+        while head:
             nexthead = None
+            needNext = None
             
-            needlink = None
-            
-            while cur:
-                if cur.left:
-                    if needlink:
-                        needlink.next = cur.left
-                        
-                    if cur.right:
-                        cur.left.next = cur.right
-                        needlink = cur.right
-                    else:
-                        needlink = cur.left
-                        
-                    if not nexthead:
-                        nexthead = cur.left
-                elif cur.right:
-                    if needlink:
-                        needlink.next = cur.right
-                        
-                    needlink = cur.right
+            while head:
+                if head.left:
+                    if not nexthead: nexthead = head.left
                     
-                    if not nexthead:
-                        nexthead = cur.right
+                    if needNext:
+                        needNext.next = head.left
+                    
+                    if head.right:
+                        head.left.next = head.right
+                        needNext = head.right
+                    else:
+                        needNext = head.left
+                    
+                elif head.right:
+                    if not nexthead: nexthead = head.right
+                    
+                    if needNext:
+                        needNext.next = head.right
+                    
+                    needNext = head.right
                 
-                cur = cur.next
-
-                
-                
+                head = head.next
+            
+            head = nexthead
             
