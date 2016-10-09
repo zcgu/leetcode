@@ -10,20 +10,20 @@ class Solution:
     # @param root, a tree link node
     # @return nothing
     def connect(self, root):
-        pre = root
-        cur = None
+        head = root
         
-        while pre and pre.left:
-            cur = pre
+        while head and head.left:
+            nexthead = head.left
             
-            while cur:
-                cur.left.next = cur.right
-            
-                if cur.next:
-                    cur.right.next = cur.next.left
+            while head:
+                head.left.next = head.right
+                
+                if head.next:
+                    head.right.next = head.next.left
                     
-                cur = cur.next
+                head = head.next
             
-            pre = pre.left
-
+            head = nexthead
+        
+        
         
