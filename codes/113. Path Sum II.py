@@ -6,27 +6,31 @@
 #         self.right = None
 
 class Solution(object):
-    def pathSum(self, root, target):
+    def pathSum(self, root, sum):
         """
         :type root: TreeNode
         :type sum: int
         :rtype: List[List[int]]
         """
-        self.res = []
+        return self.dfs(root, sum)
         
-        self.helper(root, target, [])
+    def dfs(self, root, sums):
+        if not root: return []
         
-        return self.res
-    
-    def helper(self, node, target, lst):
-        if not node:
-            return
+        if not root.left and not root.right:
+            if root.val == sums:
+                return [[root.val]]
+            else:
+                return []
         
-        if not node.left and not node.right and sum(lst) + node.val == target:
-            self.res.append(lst + [node.val])
-            return
+        res = []
         
-        self.helper(node.left, target, lst + [node.val])
-        self.helper(node.right, target, lst + [node.val])
+        for lst in self.dfs(root.left, sums - root.val):
+            res.append([root.val] + lst)
+        for lst in self.dfs(root.right, sums - root.val):
+            res.append([root.val] + lst)
+        
+        return res
+        
         
         
