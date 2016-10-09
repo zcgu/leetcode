@@ -16,11 +16,9 @@ class Solution(object):
     def helper(self, root):
         if not root:
             return [-2**31, - 2**31]
-        if not root.left and not root.right:
-            return [root.val, -2**31]
 
         l = self.helper(root.left)
         r = self.helper(root.right)
         
-        return [max(root.val, root.val + l[0], root.val + r[0]), max(max(l), max(r), root.val + max(l[0],0) + max(r[0],0))]
-        
+        a = max(root.val, left[0] + root.val, right[0] + root.val)
+        return [a, max(a, max(left), max(right), left[0] + root.val + right[0])]
