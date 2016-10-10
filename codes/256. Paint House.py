@@ -1,41 +1,20 @@
-# Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
+# There are a row of n houses, each house can be painted with one of the three colors: red, blue or green. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color.
+
+# The cost of painting each house with a certain color is represented by a n x 3 cost matrix. For example, costs[0][0] is the cost of painting house 0 with color red; costs[1][2] is the cost of painting house 1 with color green, and so on... Find the minimum cost to paint all houses.
 
 # Note:
-# The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
-
-# Example 1:
-# Given nums = [1, -1, 5, -2, 3], k = 3,
-# return 4. (because the subarray [1, -1, 5, -2] sums to 3 and is the longest)
-
-# Example 2:
-# Given nums = [-2, -1, 2, 1], k = 1,
-# return 2. (because the subarray [-1, 2] sums to 1 and is the longest)
-
-# Follow Up:
-# Can you do it in O(n) time?
-
+# All costs are positive integers.
 
 class Solution(object):
-    def maxSubArrayLen(self, nums, k):
+    def minCost(self, costs):
         """
-        :type nums: List[int]
-        :type k: int
+        :type costs: List[List[int]]
         :rtype: int
         """
-        if not nums: return 0
+        dp = [0, 0, 0]
         
-        res = -2 ** 31
+        for cost in costs:
+            dp = [cost[0] + min(dp[1], dp[2]), cost[1] + min(dp[0], dp[2]),\
+                cost[2] + min(dp[0], dp[1])]
         
-        cursum = 0
-        table = {0: -1}
-        
-        for i, num in enumerate(nums):
-            cursum += num
-            
-            if cursum - k in table:
-                res = max(res, i - table[cursum - k])
-            
-            if cursum not in table:
-                table[cursum] = i
-        
-        return res if res != -2 ** 31 else 0
+        return min(dp)
