@@ -4,31 +4,31 @@ class Solution(object):
         :type tokens: List[str]
         :rtype: int
         """
-        if not tokens:
-            return 0
-            
+        if not tokens: return 0
+        
         p = 0
         while len(tokens) > 1:
-            while tokens[p] != '+' and tokens[p] != '-' and tokens[p] != '*' and tokens[p] != '/':
-                    p += 1
             
-            a = int(tokens[p-2])
-            b = int(tokens[p-1])
-            s = tokens[p]
+            while tokens[p] not in ['+', '-', '*', '/']:
+                p += 1
             
-            if s == '+':
-                a += b
-            elif s == '-':
-                a -= b
-            elif s == '*':
-                a *= b
+            num1 = int(tokens.pop(p - 2))
+            num2 = int(tokens.pop(p - 2))
+            sign = tokens.pop(p - 2)
+            
+            if sign == '+':
+                res = num1 + num2
+            elif sign == '-':
+                res = num1 - num2
+            elif sign == '*':
+                res = num1 * num2
             else:
-                a = a / b + 1 if a % b != 0 and a / b < 0 else a / b        # This is interesting in python
+                if num1 * num2 < 0 and num1 % num2 != 0:
+                    res = num1 / num2 + 1
+                else:
+                    res = num1 / num2
             
-            tokens[p-2] = str(a)
-            del tokens[p]
-            del tokens[p-1]
+            tokens.insert(p - 2, res)
             p = p - 2
-            
-            
+        
         return int(tokens[0])
