@@ -1,0 +1,48 @@
+# Given a string s, return all the palindromic permutations (without duplicates) of it. Return an empty list if no palindromic permutation could be form.
+
+# For example:
+
+# Given s = "aabb", return ["abba", "baab"].
+
+# Given s = "abc", return [].
+
+class Solution(object):
+    def generatePalindromes(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        hasOdd = False
+        oddc = ''
+        table = {c: s.count(c) for c in set(s)}
+        
+        for c in set(s):
+            if s.count(c) % 2 != 0:
+                if hasOdd:
+                    return []
+                else:
+                    hasOdd = True
+                    oddc = c
+                    table[c] -= 1
+                    
+        self.middle = oddc if hasOdd else ''
+        
+        return self.dfs(table)
+            
+    def dfs(self, table):
+        if max(table.values()) == 0: return [self.middle]
+        
+        res = []
+        for c in table:
+            if table[c] > 0:
+                table[c] -= 2
+                
+                for l in self.dfs(table):
+                    res.append(c + l + c)            
+                table[c] += 2
+        
+        return res
+        
+        
+        
+        
