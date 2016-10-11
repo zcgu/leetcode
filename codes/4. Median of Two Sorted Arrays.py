@@ -5,6 +5,8 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: float
         """
+#         这个题的精髓之处在于，只有当mid不是0和len的时候才继续搜索，当mid是边界的时候就不用判断了，肯定是结果，省去了无数边界检查。
+
         m, n = len(nums1), len(nums2)
         if m > n:
             nums1, nums2, m, n = nums2, nums1, n, m
