@@ -7,18 +7,25 @@ class Solution(object):
         :type n: int
         :rtype: void Do not return anything, modify nums1 in-place instead.
         """
-        for _ in range(len(nums1) - m):
-            del nums1[-1]
-        for _ in range(len(nums2) - n):
-            del nums2[-1]
-            
-        p1, p2 = 0, 0
+        p1 = m - 1
+        p2 = n - 1
+        p = m + n - 1
         
-        while p2 < len(nums2):
-            if p1 < len(nums1) and nums1[p1] < nums2[p2]:
-                p1 += 1
+        while p >= 0:
+            if p1 < 0:
+                nums1[p] = nums2[p2]
+                p -= 1
+                p2 -= 1
+            elif p2 < 0:
+                nums1[p] = nums1[p1]
+                p -= 1
+                p1 -= 1
+            elif nums1[p1] > nums2[p2]:
+                nums1[p] = nums1[p1]
+                p -= 1
+                p1 -= 1
             else:
-                nums1.insert(p1, nums2[p2])
-                p2 += 1
-        
-        return
+                nums1[p] = nums2[p2]
+                p -= 1
+                p2 -= 1
+        return 
