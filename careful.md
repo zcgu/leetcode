@@ -7,4 +7,4 @@
 
 - 38. Count and Say
 - 91. Decode Ways
-- 
+- 30. Substring with Concatenation of All Words
