@@ -8,3 +8,5 @@
 - 38. Count and Say
 - 91. Decode Ways
 - 30. Substring with Concatenation of All Words
+- 273	Integer to English Words
+- 68. Text Justification
