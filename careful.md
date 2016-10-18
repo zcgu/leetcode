@@ -5,5 +5,6 @@
 
 # warm up
 
-38. Count and Say
-d
+- 38. Count and Say
+- 91. Decode Ways
+- 
