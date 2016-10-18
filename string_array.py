@@ -8,11 +8,11 @@ def substring(s):
         table[s[p2]] = table.get(s[p2], 0) + 1
         p2 += 1
         
-        while table: #不符合
+        while table: #找最小是符合，找最大是不符合。
+            res = min(res, p2 - p1) # get min length here
+            
             table[s[p1]] -= 1
             p1 += 1
-            res = min(res, p2 - p1) # get min le    ngth here
-
         res = max(res, p2 - p1) # get max length here
 
     return res
