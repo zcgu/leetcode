@@ -40,8 +40,16 @@ l = mid + 1
 r = mid
 ```
 
+# sorted array 有一系列，
 
-＃sorted array 有一系列，
 [5,6,7,8,1,2,3].
 
-判断重点
+判断重点nums[mid] < nums[l]就在右半部分，nums[mid] > nums[r]就在右半部分。
+
+
+
+
+
+
+
+
