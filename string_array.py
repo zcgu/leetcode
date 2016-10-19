@@ -1,4 +1,5 @@
 # substring 模版
+# 395. Longest Substring with At Least K Repeating Characters 模版失效？
 
 def substring(s):
     table = {}
