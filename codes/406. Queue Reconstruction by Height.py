@@ -4,32 +4,47 @@ class Solution(object):
         :type people: List[List[int]]
         :rtype: List[List[int]]
         """
-        if not people:
-            return []
-            
-        people.sort(key=lambda l: (-l[0], l[1]))
+        people.sort(key=lambda l: [-l[0], l[1]])
         
-        res = [people[0]]
-        people= people[1:]
+        res = []
         
-        while people:
-            h, count = people.pop(0)
-            
-            tmpcount = 0
-            
-            done = False
-            for i in range(len(res)):
-                if tmpcount == count and res[i][0] >= h:
-                    res.insert(i, [h, count])
-                    done = True
-                    break
-                if res[i][0] >= h:
-                    tmpcount += 1
-                
-            if not done:
-                res.append([h, count])
+        for p in people:
+            res.insert(p[1], p)
         
         return res
+
+# class Solution(object):
+#     def reconstructQueue(self, people):
+#         """
+#         :type people: List[List[int]]
+#         :rtype: List[List[int]]
+#         """
+#         if not people:
+#             return []
+            
+#         people.sort(key=lambda l: (-l[0], l[1]))
+        
+#         res = [people[0]]
+#         people= people[1:]
+        
+#         while people:
+#             h, count = people.pop(0)
+            
+#             tmpcount = 0
+            
+#             done = False
+#             for i in range(len(res)):
+#                 if tmpcount == count and res[i][0] >= h:
+#                     res.insert(i, [h, count])
+#                     done = True
+#                     break
+#                 if res[i][0] >= h:
+#                     tmpcount += 1
+                
+#             if not done:
+#                 res.append([h, count])
+        
+#         return res
         
         
         
