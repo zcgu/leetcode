@@ -1,9 +1,9 @@
-class Solution(object):
-    def canCross(self, stones):
-        """
-        :type stones: List[int]
-        :rtype: bool
-        """
+# class Solution(object):
+#     def canCross(self, stones):
+#         """
+#         :type stones: List[int]
+#         :rtype: bool
+#         """
     #     return self.next(stones, 0, 0)
         
         
@@ -23,21 +23,21 @@ class Solution(object):
     #                 break
         
     #     return False
-        if not stones: return False
-        
-        table = {s: set() for s in stones}
-        table[0] = set([0])
-        table[1] = set([0])
-        
-        for s in stones[1:]:
-            if len(table[s]) > 0:
-                for last in table[s]:
-                    for s2 in [s + s- last - 1, s +s- last, s +s- last + 1]:
-                        if s2 != s and s2 in table:
-                            table[s2].add(s)
+class Solution(object):
+    def canCross(self, stones):
+        """
+        :type stones: List[int]
+        :rtype: bool
+        """
+        table = {stone:set() for stone in stones}
+        table[0].add(0)
+
+        for stone in stones:
+            for last in table[stone]:
+                for jump in [last - 1, last, last + 1]:
+                    if stone + jump in table and stone + jump != stone:
+                        table[stone + jump].add(jump)
         return len(table[stones[-1]]) > 0
-                    
-        
         
         
         
