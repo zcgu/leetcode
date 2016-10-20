@@ -12,26 +12,22 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        self.k = k
-        self.res = 0
-        self.inorder(root)
+        self.size = 0
+        self.res = -1
+        self.inorder(root, k)
         return self.res
-        
-        
-    def inorder(self, node):
-        if not node: return
-    
-        self.inorder(node.left)
-        
-        if self.k == 0: return
-    
-        self.k -= 1
-        
-        if self.k == 0:
-            self.res = node.val
-            return
-        
-        self.inorder(node.right)
+
+    def inorder(self, root, k):
+		if not root: return
+
+		self.inorder(root.left, k)
+
+		self.size += 1
+		if self.size == k:
+			self.res = root.val
+
+		self.inorder(root.right, k)
+
         
         
         
