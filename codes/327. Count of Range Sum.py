@@ -21,7 +21,7 @@ class Solution(object):
         right, count2 = self.mergeSort(sums[len(sums)/2:], lower, upper)
         
         p1 = p2 = 0
-        for l in left:
+        for l in left:                                                      # 右边sums减左边sums在范围内的个数。
             while p1 < len(right) and right[p1] - l < lower: p1 += 1
             while p2 < len(right) and right[p2] - l <= upper: p2 += 1
             count += p2 - p1
