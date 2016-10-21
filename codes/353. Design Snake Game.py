@@ -52,7 +52,6 @@
 # Show Tags
 
 
-
 class SnakeGame(object):
 
     def __init__(self, width,height,food):
@@ -66,16 +65,11 @@ class SnakeGame(object):
         :type height: int
         :type food: List[List[int]]
         """
-        self.m = m  = height
-        self.n = n = width
-        self.table = {(0, 0) : 1}
-        self.size = 0
-        self.x = 0
-        self.y = 0
-        self.tx = 0
-        self.ty = 0
+        self.lst = [(0, 0)]
+        self.m, self.n = height, width
         self.food = food
-
+        
+        
     def move(self, direction):
         """
         Moves the snake.
@@ -85,37 +79,33 @@ class SnakeGame(object):
         :type direction: str
         :rtype: int
         """
-
-        x, y, table, tx, ty = self.x, self.y, self.table, self.tx, self.ty
+        m, n, food, lst = self.m, self.n, self.food, self.lst
         
-        if direction == 'U': xx, yy = x -1, y
+        x, y = self.lst[-1]
+        
+        if direction == 'U': xx, yy = x - 1, y
         elif direction == 'D': xx, yy = x + 1, y
         elif direction == 'L': xx, yy = x, y - 1
         else: xx, yy = x, y + 1
         
-        if xx < 0 or yy < 0 or xx >= self.m or yy >= self.n: return -1
+        if xx < 0 or xx >= m or yy < 0 or yy >= n: return -1
         
-        if self.food and [xx, yy] == self.food[0]:
-            self.size += 1
-            self.food = self.food[1:]
-            table[(xx, yy)] = table[(x, y)] + 1
-            self.x, self.y = xx, yy
-            return self.size
+        if food and [xx, yy] == food[0]:
+            lst.append((xx, yy))
+            del food[0]
+            return len(lst) - 1
         else:
-            if (xx != tx or yy != ty) and (xx, yy) in table and table[(xx, yy)] != 0:
-                return -1
-            
-            tail = table[(tx, ty)]
-            
-            table[(xx,yy)] = table[(x, y)] + 1
-            self.x, self.y = xx, yy
-            for i, j in [(1,0), (-1,0), (0,1), (0, -1)]:
-                if self.m >tx + i >=0 and self.n > ty + j >= 0 and (tx +i, ty+j) in table and  table[(tx + i, ty + j)] == tail + 1:
-                    if xx != tx or yy != ty:  table[(tx, ty)] = 0
-                    self.tx, self.ty = tx + i, ty + j
-                    return self.size
-
+            del lst[0]
+            if (xx, yy) in lst: return -1
+            lst.append((xx, yy))
+            return len(lst) - 1
         
+        
+
+# Your SnakeGame object will be instantiated and called as such:
+# obj = SnakeGame(width, height, food)
+# param_1 = obj.move(direction)
+  
 
 # Your SnakeGame object will be instantiated and called as such:
 # obj = SnakeGame(width, height, food)
