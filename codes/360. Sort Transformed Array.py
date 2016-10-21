@@ -50,10 +50,7 @@ class Solution(object):
                     res.append(num2)
                 p2 -= 1
 
-        if len(res) > 1 and res[0] > res[1]:
-            return res[::-1]
-        else:
-            return res
+        return res
         
     
   
