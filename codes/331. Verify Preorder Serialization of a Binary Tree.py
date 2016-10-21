@@ -12,15 +12,7 @@ class Solution(object):
         l = preorder.split(',')
         i = 1
         while i < len(l):
-            
-            if i == 0 and l[i] == '#':
-                if len(l) == 1:
-                    return True
-                else:
-                    return False
-            elif l[i] == '#' and l[i-1] == '#':
-                if i - 2 < 0:
-                    return False
+            if i >= 2 and l[i] == '#' and l[i-1] == '#' and l[i - 2] != '#':
                 del l[i]
                 del l[i-1]
                 l[i-2] = '#'
