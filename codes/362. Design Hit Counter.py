@@ -58,7 +58,7 @@ class HitCounter(object):
         :type timestamp: int
         :rtype: int
         """
-        
+#         这里可以用二分搜索。
         while self.lst and self.lst[0] <= timestamp - 300:
             del self.lst[0]
         return len(self.lst)
