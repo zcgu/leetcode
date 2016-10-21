@@ -54,7 +54,6 @@
 # Show Company Tags
 # Show Tags
 
-
 class TicTacToe(object):
 
     def __init__(self, n):
@@ -62,7 +61,10 @@ class TicTacToe(object):
         Initialize your data structure here.
         :type n: int
         """
-        self.m = [[0 for _ in range(n)] for _ in range(n)]
+        self.n = n
+        self.rows = [0 for _ in range(n)]
+        self.cols = [0 for _ in range(n)]
+        self.d1 = self.d2 = 0
 
     def move(self, row, col, player):
         """
@@ -79,25 +81,69 @@ class TicTacToe(object):
         :type player: int
         :rtype: int
         """
-        n = len(self.m)
+        num = 1 if player == 2 else - 1
         
-        self.m[row][col] = player
-
-        if all(self.m[x][col] == player for x in range(n)):
-            return player
-
-        if all(self.m[row][y] == player for y in range(n)):
-            return player
-
-        if all(self.m[i][i] == player for i in range(n)):
-            return player
-
-        if all(self.m[n - 1 - i][i] == player for i in range(n)):
-            return player
+        self.rows[row] += num
+        self.cols[col] += num
+        
+        if row == col: self.d1 += num
+        if row == self.n - col - 1: self.d2 += num
+        
+        if abs(self.rows[row]) == self.n or abs(self.cols[col]) == self.n or \
+            abs(self.d1) == self.n or abs(self.d2) == self.n:
+                return player
         return 0
 
 
 # Your TicTacToe object will be instantiated and called as such:
 # obj = TicTacToe(n)
 # param_1 = obj.move(row,col,player)
+
+
+
+# class TicTacToe(object):
+
+#     def __init__(self, n):
+#         """
+#         Initialize your data structure here.
+#         :type n: int
+#         """
+#         self.m = [[0 for _ in range(n)] for _ in range(n)]
+
+#     def move(self, row, col, player):
+#         """
+#         Player {player} makes a move at ({row}, {col}).
+#         @param row The row of the board.
+#         @param col The column of the board.
+#         @param player The player, can be either 1 or 2.
+#         @return The current winning condition, can be either:
+#                 0: No one wins.
+#                 1: Player 1 wins.
+#                 2: Player 2 wins.
+#         :type row: int
+#         :type col: int
+#         :type player: int
+#         :rtype: int
+#         """
+#         n = len(self.m)
+        
+#         self.m[row][col] = player
+
+#         if all(self.m[x][col] == player for x in range(n)):
+#             return player
+
+#         if all(self.m[row][y] == player for y in range(n)):
+#             return player
+
+#         if all(self.m[i][i] == player for i in range(n)):
+#             return player
+
+#         if all(self.m[n - 1 - i][i] == player for i in range(n)):
+#             return player
+#         return 0
+
+
+# # Your TicTacToe object will be instantiated and called as such:
+# # obj = TicTacToe(n)
+# # param_1 = obj.move(row,col,player)
 
