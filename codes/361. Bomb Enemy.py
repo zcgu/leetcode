@@ -14,53 +14,89 @@
 # Special thanks to @memoryless for adding this problem and creating all test cases.
 
 
+
+
+
 class Solution(object):
     def maxKilledEnemies(self, grid):
         """
         :type grid: List[List[str]]
         :rtype: int
         """
+#         这个感觉不太容易想其实。
+
         if not grid: return 0
         m = len(grid)
         n = len(grid[0])
-
-        value = [[0 for _ in range(n)] for _ in range(m)]
-
-        for x in range(m):
-            tmp = tmp2 = 0
-            for y in range(n):
-                if grid[x][y] == 'W':
-                    tmp = 0
-                elif grid[x][y] == 'E':
-                    tmp += 1
-                else:
-                    value[x][y] += tmp
-
-                if grid[x][n - 1 -y] == 'W':
-                    tmp2 = 0
-                elif grid[x][n - 1 -y] == 'E':
-                    tmp2 += 1
-                else:
-                    value[x][n - 1 -y] += tmp2
-        for y in range(n):
-            tmp = tmp2 = 0
-            for x in range(m):
-                if grid[x][y] == 'W':
-                    tmp = 0
-                elif grid[x][y] == 'E':
-                    tmp += 1
-                else:
-                    value[x][y] += tmp
-                if grid[m-1-x][y] == 'W':
-                    tmp2 = 0
-                elif grid[m-1-x][y] == 'E':
-                    tmp2 += 1
-                else:
-                    value[m-1-x][y] += tmp2
-
+        rowhit = 0
+        colhit = [0 for j in range(n)]
         res = 0
+        
         for x in range(m):
             for y in range(n):
+                if x == 0 or grid[x - 1][y] == 'W':
+                    colhit[y] = 0
+                    for k in range(x, m):
+                        if grid[k][y] == 'W': break
+                        elif grid[k][y] == 'E': colhit[y] += 1
+                
+                if y == 0 or grid[x][y - 1] == 'W':
+                    rowhit = 0
+                    for k in range(y, n):
+                        if grid[x][k] == 'W': break
+                        elif grid[x][k] == 'E': rowhit += 1
+                
                 if grid[x][y] == '0':
-                    res = max(res, value[x][y])
+                    res = max(res, rowhit + colhit[y])
         return res
+
+# class Solution(object):
+#     def maxKilledEnemies(self, grid):
+#         """
+#         :type grid: List[List[str]]
+#         :rtype: int
+#         """
+#         if not grid: return 0
+#         m = len(grid)
+#         n = len(grid[0])
+
+#         value = [[0 for _ in range(n)] for _ in range(m)]
+
+#         for x in range(m):
+#             tmp = tmp2 = 0
+#             for y in range(n):
+#                 if grid[x][y] == 'W':
+#                     tmp = 0
+#                 elif grid[x][y] == 'E':
+#                     tmp += 1
+#                 else:
+#                     value[x][y] += tmp
+
+#                 if grid[x][n - 1 -y] == 'W':
+#                     tmp2 = 0
+#                 elif grid[x][n - 1 -y] == 'E':
+#                     tmp2 += 1
+#                 else:
+#                     value[x][n - 1 -y] += tmp2
+#         for y in range(n):
+#             tmp = tmp2 = 0
+#             for x in range(m):
+#                 if grid[x][y] == 'W':
+#                     tmp = 0
+#                 elif grid[x][y] == 'E':
+#                     tmp += 1
+#                 else:
+#                     value[x][y] += tmp
+#                 if grid[m-1-x][y] == 'W':
+#                     tmp2 = 0
+#                 elif grid[m-1-x][y] == 'E':
+#                     tmp2 += 1
+#                 else:
+#                     value[m-1-x][y] += tmp2
+
+#         res = 0
+#         for x in range(m):
+#             for y in range(n):
+#                 if grid[x][y] == '0':
+#                     res = max(res, value[x][y])
+#         return res
