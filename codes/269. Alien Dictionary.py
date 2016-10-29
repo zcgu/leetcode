@@ -1,80 +1,45 @@
-# There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
-
-# For example,
-# Given the following words in dictionary,
-
-# [
-#   "wrt",
-#   "wrf",
-#   "er",
-#   "ett",
-#   "rftt"
-# ]
-# The correct order is: "wertf".
-
-# Note:
-# You may assume all letters are in lowercase.
-# If the order is invalid, return an empty string.
-# There may be multiple valid order of letters, return any one of them is fine.
-
 class Solution(object):
     def alienOrder(self, words):
         """
         :type words: List[str]
         :rtype: str
         """
-        # 拓扑排序
-
-        total = set()
+        graph = {}
+        
         for word in words:
             for c in word:
-                total.add(c)
+                graph[c] = set()
         
-        graph = {c: set() for c in total}
-
-        for i in range(1, len(words)):
-            word1 = words[i - 1]
-            word2 = words[i]
-     
-            p1 = p2 = 0
+        for i in range(len(words) - 1):
+            word1, word2 = words[i], words[i + 1]
             
-            while p1 < len(word1) and p2 < len(word2) and word1[p1] == word2[p2]:
-                p1 += 1
-                p2 += 1
-            
-            if p1 < len(word1) and p2 >= len(word2):
-                return ''
-                
-            if p1 >= len(word1) or p2 >= len(word2):
-                continue
-            
-            graph[word1[p1]].add(word2[p2])
-        
-        res = ''
-        que = []
-        degree = {c: 0 for c in total}
-        
-        for c in graph:
-            degree[c] = len(graph[c])
-            if len(graph[c]) == 0:
-                que.append(c)
-                
-        while que:
-            c = que.pop(0)
-            res = c + res
-            
-            for p in graph:
-                if c in graph[p]:
-                    degree[p] -= 1
+            for p, c in enumerate(word1):
+                if p >= len(word2):
+                    return ''
                     
-                    if degree[p] == 0:
-                        que.append(p)
+                if word1[p] != word2[p]:
+                    graph[word2[p]].add(word1[p])
+                    break
         
-        if max(degree.values()) > 0:
+        degree = {key: 0 for key in graph}
+        for key in graph:
+            for n in graph[key]:
+                degree[n] += 1
+        
+        que = [key for key in degree if degree[key] == 0]
+        res = ''
+        
+        while que:
+            key = que.pop(0)
+            res = key + res
+            
+            for n in graph[key]:
+                degree[n] -= 1
+                if degree[n] == 0:
+                    que.append(n)
+        
+        if len(res) != len(graph):
             return ''
-
-        return res
-        
-        
-        
+        else:
+            return res
         
