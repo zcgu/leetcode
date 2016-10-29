@@ -36,3 +36,19 @@ class Solution(object):
             res = max(res, count)
         
         return res
+
+#         2. 用heap的做法
+#         intervals.sort(key=lambda l: [l.start, l.end])
+        
+#         heap = []
+#         from heapq import *
+        
+#         res = 0
+        
+#         for i in intervals:
+#             while heap and heap[0] <= i.start:
+#                 heappop(heap)
+#             heappush(heap, i.end)
+#             res = max(res, len(heap))
+        
+#         return res
