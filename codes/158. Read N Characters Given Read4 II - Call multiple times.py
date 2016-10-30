@@ -13,9 +13,14 @@
 # @return an integer
 # def read4(buf):
 
+# The read4 API is already defined for you.
+# @param buf, a list of characters
+# @return an integer
+# def read4(buf):
+
 class Solution(object):
-    tmp = ['' for _ in range(4)]
-    index = 0
+    def __init__(self):
+        self.tmp = []
     
     def read(self, buf, n):
         """
@@ -23,47 +28,22 @@ class Solution(object):
         :type n: Maximum number of characters to read (int)
         :rtype: The number of characters read (int)
         """
-        
-        tmp = self.tmp
-        total = 0
-        
-        if n <= self.index:
-            buf[total:total+ n] = self.tmp[:n]
-            self.tmp[:self.index - n] = self.tmp[n: self.index]
-            self.index -= n
-            return n
-        else:
-            buf[total:total+self.index] = self.tmp[:self.index]
-            total += self.index
-            n -= self.index
-            self.index = 0
-        
-        for _ in range(n / 4):
-            num = read4(tmp)
+        p = 0
+        while True:
             
-            if num < 4:
-                buf[total:total+num] = tmp[:num]
-                self.index = 0
-                return total + num
-            else:
-                buf[total:total + 4] = tmp[:4]
-                total += 4
-        
-        if n % 4 != 0:
-            num = read4(tmp)
+            while self.tmp:
+                if p == n:
+                    return p
+                buf[p] = self.tmp[0]
+                del self.tmp[0]
+                p += 1
+
+            mybuf = ['' for _ in range(4)]
+            readnum = read4(mybuf)
             
-            if num <= n % 4:
-                buf[total:total + num] = tmp[:num]
-                self.index = 0
-                return total + num
-            else:
-                buf[total:total + n % 4] = tmp[:n % 4]
-                tmp[:num - n%4] = tmp[n%4: num]
-                self.index = num - n % 4
-                return total + n % 4
-        else:
-            self.index = 0
-            return total
+            if readnum == 0:
+                return p
             
-            
+            for i in range(readnum):
+                self.tmp.append(mybuf[i])
             
