@@ -5,6 +5,7 @@ class Solution(object):
         :rtype: int
         """
         # buy，sell，cool是之前以buy，sell，和cool结尾的序列的最大值，不是当前位置结尾。
+        # This can be easily convert to O(1) space dp.
         
         if len(prices) < 2:
             return 0
