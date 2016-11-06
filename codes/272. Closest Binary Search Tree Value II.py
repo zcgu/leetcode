@@ -24,6 +24,44 @@
 #         self.left = None
 #         self.right = None
 
+# class Solution(object):
+#     def closestKValues(self, root, target, k):
+#         """
+#         :type root: TreeNode
+#         :type target: float
+#         :type k: int
+#         :rtype: List[int]
+#         """
+#         if not root: return []
+#         self.lst = []
+    
+#         self.dfs(root, target, k)
+
+#         return [pair[1] for pair in self.lst]
+
+
+    
+#     def dfs(self, root, target, k):
+#         if not root: return
+        
+#         from bisect import bisect_left
+#         index = bisect_left(self.lst, (abs(root.val - target), root.val))
+#         self.lst.insert(index, (abs(root.val - target), root.val))
+
+#         if len(self.lst) > k:
+#           self.lst.pop()
+        
+#         self.dfs(root.left, target, k)
+#         self.dfs(root.right, target, k)
+
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
 class Solution(object):
     def closestKValues(self, root, target, k):
         """
@@ -32,26 +70,99 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        if not root: return []
-        self.lst = []
-    
-        self.dfs(root, target, k)
-
-        return [pair[1] for pair in self.lst]
-
-
-    
-    def dfs(self, root, target, k):
-        if not root: return
+        stack1 = []
+        stack2 = []
         
-        from bisect import bisect_left
-        index = bisect_left(self.lst, (abs(root.val - target), root.val))
-        self.lst.insert(index, (abs(root.val - target), root.val))
-
-        if len(self.lst) > k:
-          self.lst.pop()
+        cur = root
+        while cur:
+            if cur.val <= target:
+                stack1.append(cur)
+                cur = cur.right
+            else:
+                stack2.append(cur)
+                cur = cur.left
         
-        self.dfs(root.left, target, k)
-        self.dfs(root.right, target, k)
+        res = []
+        for _ in range(k):
+            if not stack1 and not stack2:
+                return res
+            elif not stack2:
+                node = self.nextSmaller(stack1)
+                res.append(node.val)
+            elif not stack1:
+                node = self.nextLarger(stack2)
+                res.append(node.val)
+            elif abs(stack1[-1].val - target) < abs(stack2[-1].val - target):
+                node = self.nextSmaller(stack1)
+                res.append(node.val)
+            else:
+                node = self.nextLarger(stack2)
+                res.append(node.val)
+        return res
+    
+    
+    
+    
+    def nextLarger(self, stack):
+        node = stack.pop()
+        
+        p = node.right
+        while p:
+            stack.append(p)
+            p = p.left
+        
+        return node
+    
+    def nextSmaller(self, stack):
+        node = stack.pop()
+        
+        p = node.left
+        while p:
+            stack.append(p)
+            p = p.right
+        
+        return node
+    
+    
+# # Definition for a binary tree node.
+# # class TreeNode(object):
+# #     def __init__(self, x):
+# #         self.val = x
+# #         self.left = None
+# #         self.right = None
+
+# class Solution(object):
+#     def closestKValues(self, root, target, k):
+#         """
+#         :type root: TreeNode
+#         :type target: float
+#         :type k: int
+#         :rtype: List[int]
+#         """
+#         if not root: return []
+#         self.lst = []
+    
+#         self.dfs(root, target, k)
+
+#         return [pair[1] for pair in self.lst]
 
 
+    
+#     def dfs(self, root, target, k):
+#         if not root: return
+        
+#         from bisect import bisect_left
+#         index = bisect_left(self.lst, (abs(root.val - target), root.val))
+#         self.lst.insert(index, (abs(root.val - target), root.val))
+
+#         if len(self.lst) > k:
+#           self.lst.pop()
+        
+#         self.dfs(root.left, target, k)
+#         self.dfs(root.right, target, k)
+
+
+        
+        
+        
+        
