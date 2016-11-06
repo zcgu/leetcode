@@ -9,47 +9,73 @@
 # Show Company Tags
 # Show Tags
 
+# The knows API is already defined for you.
+# @param a, person a
+# @param b, person b
+# @return a boolean, whether a knows b
+# def knows(a, b):
 
 class Solution(object):
-
     def findCelebrity(self, n):
         """
         :type n: int
         :rtype: int
         """
-        graph = [(set(), set()) for _ in range(n)]
+        
+        c = 0
+        for i in range(1, n):
+            if knows(c, i):
+                c = i
+        
+        if any(not knows(i, c) for i in range(n) if i != c):
+            return -1
+        
+        if any(knows(c, i) for i in range(n) if i != c):
+            return -1
+        
+        return c
                 
-        for a in range(n):
-            flag = True
-            for b in range(n):
-                if a == b: continue
-              
-                if knows(a, b):
-                    graph[a][0].add(b)
-                    flag = False
-                    break
-                else:
-                    graph[a][1].add(b)
-                
-            if flag:
-                for c in range(n):
-                    if c == a: continue
 
-                    if a in graph[c][1]:
-                        flag = False
-                        break
-                    
-                    if a in graph[c][0]:
-                        continue
-                    
-                    if knows(c, a):
-                        graph[c][0].add(b)
-                    else:
-                        graph[c][1].add(b)
-                        flag = False
-                        break
+# class Solution(object):
+
+#     def findCelebrity(self, n):
+#         """
+#         :type n: int
+#         :rtype: int
+#         """
+#         graph = [(set(), set()) for _ in range(n)]
                 
-                if flag:
-                    return a
+#         for a in range(n):
+#             flag = True
+#             for b in range(n):
+#                 if a == b: continue
+              
+#                 if knows(a, b):
+#                     graph[a][0].add(b)
+#                     flag = False
+#                     break
+#                 else:
+#                     graph[a][1].add(b)
+                
+#             if flag:
+#                 for c in range(n):
+#                     if c == a: continue
+
+#                     if a in graph[c][1]:
+#                         flag = False
+#                         break
+                    
+#                     if a in graph[c][0]:
+#                         continue
+                    
+#                     if knows(c, a):
+#                         graph[c][0].add(b)
+#                     else:
+#                         graph[c][1].add(b)
+#                         flag = False
+#                         break
+                
+#                 if flag:
+#                     return a
                         
-        return -1
+#         return -1
