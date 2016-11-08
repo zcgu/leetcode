@@ -4,9 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        table = {}
-        for c in s:
-            table[c] = table.get(c, 0) + 1
+        table = {c: s.count(c) for c in set(s)}
         
         stack = []
         
@@ -15,21 +13,13 @@ class Solution(object):
                 table[c] -= 1
                 continue
             
-            if not stack or c > stack[-1]:
-                stack.append(c)
-                table[c] -= 1
-            else:
-                while stack and c <= stack[-1]:
-                    if table[stack[-1]] > 0:
-                        c2 = stack.pop()
-                    else:
-                        break
-                stack.append(c)
-                table[c] -= 1
-                
+            while stack and stack[-1] > c and table[stack[-1]] > 0:
+                stack.pop()
+            
+            table[c] -= 1
+            stack.append(c)
+        
         return ''.join(stack)
-
-
 
 # class Solution(object):
 #     def removeDuplicateLetters(self, s):
